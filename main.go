@@ -54,11 +54,7 @@ func main() {
 
 	router := gin.Default()
 
-	router.Use(cors.New(
-		cors.Config{
-			AllowOrigins: []string{"https://c8v86.csb.app/"},
-		},
-	))
+	router.Use(cors.Default())
 
 	api := router.Group("/api")
 	api.GET("/jokes", GetAllJokes)
