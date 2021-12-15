@@ -1,1 +1,1 @@
-web: bin\go-pinoy-jokes
+web: bin/go-pinoy-jokes
