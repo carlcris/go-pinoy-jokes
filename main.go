@@ -55,7 +55,7 @@ func main() {
 
 	api := router.Group("/api")
 	api.GET("/jokes", GetAllJokes)
-	api.POST("/jokes/joke:jokeID", LikeJoke)
+	api.POST("/jokes/like/:jokeID", LikeJoke)
 
 	router.Run(":" + port)
 }
