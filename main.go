@@ -1,16 +1,18 @@
 package main
 
 import (
+	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 type Joke struct {
-	ID    int    `json: "id" binding:"required"`
-	Likes int    `json: "likes"`
-	Joke  string `json: "joke" binding:"required"`
+	ID    int    `json:"id" binding:"required"`
+	Likes int    `json:"likes"`
+	Joke  string `json:"joke" binding:"required"`
 }
 
 var jokes = []Joke{
@@ -43,6 +45,11 @@ func LikeJoke(c *gin.Context) {
 }
 
 func main() {
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
 
 	router := gin.Default()
 
@@ -50,5 +57,5 @@ func main() {
 	api.GET("/jokes", GetAllJokes)
 	api.POST("/jokes/joke:jokeID", LikeJoke)
 
-	router.Run(":8080")
+	router.Run(":" + port)
 }
