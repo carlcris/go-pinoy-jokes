@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -52,6 +53,12 @@ func main() {
 	}
 
 	router := gin.Default()
+
+	router.Use(cors.New(
+		cors.Config{
+			AllowOrigins: []string{"https://c8v86.csb.app/"},
+		},
+	))
 
 	api := router.Group("/api")
 	api.GET("/jokes", GetAllJokes)
